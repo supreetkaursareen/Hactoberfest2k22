@@ -1,0 +1,27 @@
+class Solution {
+    vector<vector<int>> res;
+    void path(TreeNode* root, int targetSum, vector<int> temp, int sum){
+        if(root == NULL)
+            return;
+        sum += root->val;
+        temp.push_back(root->val);
+        if(sum == targetSum && root->left == NULL && root->right == NULL){
+            res.push_back(temp);
+            return ;
+        }
+        else if(sum != targetSum && root->left == NULL && root->right == NULL){
+            temp.pop_back();
+            return ;
+        }
+         path(root->left,targetSum,temp,sum);
+        path(root->right,targetSum,temp,sum);
+    }
+public:
+    vector<vector<int>> pathSum(TreeNode* root, int targetSum) {
+        vector<int> temp;
+        int sum = 0;
+        path(root, targetSum, temp, sum);
+        
+        return res;
+    }
+};
